@@ -1,62 +1,62 @@
 # SpartinaData
 
-互花米草（*Spartina alterniflora*，smooth cordgrass）转录组 / 基因表达计数与功能注释基因集数据集。
+Transcriptome / gene-expression count matrices and functional gene-set collections for smooth cordgrass (*Spartina alterniflora*).
 
-本仓库包含两部分内容：
+This repository contains two types of data:
 
-1. **基因表达计数矩阵**：不同组织/器官、不同地点、高温胁迫（HT）与对照（CK）条件下的 RNA-seq 基因原始计数（read counts）。
-2. **功能注释基因集**：用于富集分析的 GO（Gene Ontology）和 KEGG 通路基因集合，以及对应的文献来源注释表。
-
----
-
-## 1. 物种与参考基因组
-
-- **物种**：互花米草 *Spartina alterniflora*
-- **染色体数**：31 条染色体（2n = 62）
-- **参考基因组**：Genome Warehouse / CNCB-NGDC 组装，序列号为 `GWHCBIM00000000`（各条染色体 / scaffold 依次编号为 `GWHCBIM00000001`、`GWHCBIM00000002` ……）
-- **基因命名**：
-  - `Chr01G000000` ～ `Chr31G000000`：位于 31 条染色体上的基因
-  - `Chr0G000000`：未能定位到具体染色体的基因（unplaced）
-  - `novel.xxx`：参考基因组注释之外、由转录组拼接得到的新基因
-
-> 注：`GWHCBIM00000000` 是中国科学院等团队发表的互花米草参考基因组组装（Genome Warehouse 登录号）。若需要严格的引用信息，请以你使用的组装版本和发表文献为准。
+1. **Gene-expression count matrices**: RNA-seq raw read counts across multiple tissues/organs, sampling locations, and heat-stress (HT) versus control (CK) conditions.
+2. **Functional annotation gene sets**: GO (Gene Ontology) and KEGG pathway gene sets for enrichment analysis, together with the literature-source annotation tables from which they were compiled.
 
 ---
 
-## 2. 实验设计
+## 1. Species and Reference Genome
 
-数据为一个高温胁迫实验的 RNA-seq 基因表达定量结果，设计包含三个因子：
+- **Species**: smooth cordgrass *Spartina alterniflora*
+- **Chromosome number**: 31 chromosomes (2n = 62)
+- **Reference genome**: Genome Warehouse / CNCB-NGDC assembly, accession `GWHCBIM00000000` (individual chromosomes/scaffolds are numbered `GWHCBIM00000001`, `GWHCBIM00000002`, ...)
+- **Gene naming**:
+  - `Chr01G000000` – `Chr31G000000`: genes on the 31 chromosomes
+  - `Chr0G000000`: genes not assigned to a specific chromosome (unplaced)
+  - `novel.xxx`: novel genes derived from transcriptome assembly that are absent from the reference annotation
 
-- **地点（Location）**：`TJ`、`YQ`、`LZ`（三个采样地点）
-- **组织 / 器官（Tissue/Organ）**：花、叶、根、茎等多个组织/器官（见下方缩写表）
-- **处理（Condition）**：
-  - `CK`：对照（control）
-  - `HT`：高温胁迫（heat / high-temperature treatment）
+> Note: `GWHCBIM00000000` is the *Spartina alterniflora* reference genome assembly deposited in the Genome Warehouse. For a formal citation, please refer to the exact assembly version and the corresponding publication you use.
 
-样本列命名规则：
+---
+
+## 2. Experimental Design
+
+The data are RNA-seq gene-expression quantifications from a heat-stress experiment with three factors:
+
+- **Location**: `TJ`, `YQ`, `LZ` (three sampling sites)
+- **Tissue / Organ**: flower, leaf, root, stem, and several other tissues/organs (see the abbreviation table below)
+- **Condition**:
+  - `CK`: control
+  - `HT`: heat / high-temperature stress
+
+Sample-column naming convention:
 
 ```text
-{地点}_{组织}_{处理}[_{重复}]
+{Location}_{Tissue}_{Condition}[_{Replicate}]
 ```
 
-例如 `TJ_FLR_CK` 表示 TJ 地点、FLR 组织、对照处理；`YQ_FLR_HT` 表示 YQ 地点、FLR 组织、高温处理。部分样本带 `_1` 后缀，表示第 1 个生物学重复。
+For example, `TJ_FLR_CK` means site TJ, tissue FLR, control; `YQ_FLR_HT` means site YQ, tissue FLR, heat stress. Some samples carry a `_1` suffix indicating biological replicate 1.
 
 ---
 
-## 3. 文件清单
+## 3. File Inventory
 
-| 文件 | 类型 | 内容 |
-|------|------|------|
-| `FLR_gene_count.xls` 等 15 个 `*_gene_count.xls` | 制表符分隔文本 | 各组织的基因表达计数矩阵 |
-| `GO_collection_20260312_GY_V3.xlsx` | Excel | 603 条 GO 术语及文献来源 |
-| `KEGG_collection_20260312_GY_V3.xlsx` | Excel | 987 条 KEGG 通路及文献来源 |
-| `GO_gene_sets.gmt` | GMT | 762 个 GO 基因集（基因列表） |
-| `KEGG_gene_sets.gmt` | GMT | 141 个 KEGG 基因集（基因列表） |
+| File | Type | Content |
+|------|------|---------|
+| 15 files named `*_gene_count.xls` | Tab-separated text | Gene-expression count matrix for each tissue |
+| `GO_collection_20260312_GY_V3.xlsx` | Excel | 603 curated GO terms with literature sources |
+| `KEGG_collection_20260312_GY_V3.xlsx` | Excel | 987 curated KEGG pathways with literature sources |
+| `GO_gene_sets.gmt` | GMT | 762 GO gene sets (gene lists) |
+| `KEGG_gene_sets.gmt` | GMT | 141 KEGG gene sets (gene lists) |
 
-15 个基因计数文件如下（文件名中的缩写即组织/器官代码）：
+The 15 gene-count files (the abbreviation in each filename is the tissue/organ code):
 
-| 文件 | 样本列示例 | 基因数 |
-|------|-----------|--------|
+| File | Example sample columns | Gene count |
+|------|------------------------|------------|
 | `flower_gene_count.xls` | `TJ_F_CK_1 … LZ_F_HT_1` | 73,681 |
 | `leaf_gene_count.xls` | `TJ_L_CK_1 … LZ_L_HT_1` | 73,681 |
 | `root_gene_count.xls` | `TJ_R_CK_1 … LZ_R_HT_1` | 73,681 |
@@ -73,114 +73,114 @@
 | `SR_gene_count.xls` | `TJ_SR_CK_1 … LZ_SR_HT_1` | 73,681 |
 | `mixed_gene_count.xls` | `CK1 CK2 CK3 HT1 HT2 HT3` | 78,085 |
 
-> `mixed_gene_count.xls` 为混合/混池样本，样本列没有地点前缀，CK 与 HT 各 3 个生物学重复；该文件额外包含 4,404 个 `novel.xxx` 新基因。
+> `mixed_gene_count.xls` contains mixed/pooled samples. Its sample columns carry no location prefix, with three biological replicates each for CK and HT. This file additionally includes 4,404 `novel.xxx` genes.
 
 ---
 
-## 4. 基因计数文件格式（`*_gene_count.xls`）
+## 4. Gene-Count File Format (`*_gene_count.xls`)
 
-> 尽管扩展名是 `.xls`，这些文件实际上是**制表符（Tab）分隔的纯文本文件**，可直接用 `read.delim()`、`pandas.read_csv(sep="\t")` 等读取。
+> Despite the `.xls` extension, these files are actually **tab-separated plain-text** files and can be read directly with `read.delim()`, `pandas.read_csv(sep="\t")`, etc.
 
-每行一个基因，共 16 列：
+One gene per row, 16 columns in total:
 
-| 列 | 名称 | 说明 |
-|----|------|------|
-| 1 | `gene_id` | 基因编号，如 `Chr03G019800`、`novel.703` |
-| 2–7 | 样本计数列 | 各样本的原始 read count（整数），列名见样本命名规则 |
-| 8 | `gene_name` | 基因名称（当前与 `gene_id` 相同） |
-| 9 | `gene_chr` | 所在序列的组装编号，如 `GWHCBIM00000003` |
-| 10 | `gene_start` | 基因起始位置（1-based） |
-| 11 | `gene_end` | 基因终止位置（1-based） |
-| 12 | `gene_strand` | 链方向，`+` 或 `-` |
-| 13 | `gene_length` | 基因长度（bp） |
-| 14 | `gene_biotype` | 基因类型，如 `protein_coding` |
-| 15 | `gene_description` | 功能注释（UniProt/Swiss-Prot 与 Pfam，用 `&&` 分隔；`-` 表示无注释） |
-| 16 | `Family` | 转录因子（TF）家族，如 `bHLH`、`WRKY`、`NAC`；`-` 表示未归类为转录因子 |
+| Column | Name | Description |
+|--------|------|-------------|
+| 1 | `gene_id` | Gene identifier, e.g. `Chr03G019800`, `novel.703` |
+| 2–7 | sample count columns | Raw read counts (integers) per sample; see the naming convention |
+| 8 | `gene_name` | Gene name (currently identical to `gene_id`) |
+| 9 | `gene_chr` | Assembly sequence ID, e.g. `GWHCBIM00000003` |
+| 10 | `gene_start` | Gene start position (1-based) |
+| 11 | `gene_end` | Gene end position (1-based) |
+| 12 | `gene_strand` | Strand, `+` or `-` |
+| 13 | `gene_length` | Gene length (bp) |
+| 14 | `gene_biotype` | Gene biotype, e.g. `protein_coding` |
+| 15 | `gene_description` | Functional annotation (UniProt/Swiss-Prot and Pfam, joined by `&&`; `-` means no annotation) |
+| 16 | `Family` | Transcription-factor (TF) family, e.g. `bHLH`, `WRKY`, `NAC`; `-` means not classified as a TF |
 
-`gene_description` 的典型格式：
+Typical `gene_description` format:
 
 ```text
 - && sp|P09189|HSP7C_PETHY Heat shock cognate 70 kDa protein OS=Petunia hybrida ... && PF00012:Hsp70 protein
 ```
 
-三段分别对应：无/自注释、Swiss-Prot 同源蛋白、Pfam 结构域，中间用 `&&` 连接。
+The three segments correspond to: self/no annotation, Swiss-Prot homologous protein, and Pfam domain, joined by `&&`.
 
-主要转录因子家族（按数量排序）包括：`bHLH`、`LBD`、`MYB_related`、`NAC`、`C2H2`、`ERF`、`WRKY`、`FAR1`、`bZIP`、`C3H`、`MYB`、`TCP`、`B3`、`G2-like`、`M-type_MADS`、`GRAS`、`Trihelix`、`HD-ZIP`、`ARF`、`HSF`、`GATA` 等。
-
----
-
-## 5. 组织 / 器官缩写
-
-可以明确对应的缩写：
-
-| 缩写 | 含义 |
-|------|------|
-| `F` | 花（flower） |
-| `L` | 叶（leaf） |
-| `R` | 根（root） |
-| `S` | 茎（stem） |
-| `mixed` | 混合/混池样本 |
-
-其余组合缩写（`FL`、`FLR`、`FLS`、`FR`、`FS`、`FSR`、`LS`、`LR`、`LSR`、`SR`）表示不同组织/器官或发育时期，推测 `F*` 系列多为花/果/花序相关，`L*` 系列多为叶相关（如 `LS` 可能为叶鞘 leaf sheath），`SR` 可能为茎/根相关。**这些缩写的确切定义请以原始实验记录为准。**
+The most abundant transcription-factor families (by gene count) include `bHLH`, `LBD`, `MYB_related`, `NAC`, `C2H2`, `ERF`, `WRKY`, `FAR1`, `bZIP`, `C3H`, `MYB`, `TCP`, `B3`, `G2-like`, `M-type_MADS`, `GRAS`, `Trihelix`, `HD-ZIP`, `ARF`, `HSF`, `GATA`, and others.
 
 ---
 
-## 6. GO / KEGG 注释集合（`.xlsx`）
+## 5. Tissue / Organ Abbreviations
 
-这两个文件是从多物种文献中整理得到的 GO 术语 / KEGG 通路集合，用于功能注释或富集分析的背景。
+Abbreviations that can be mapped unambiguously:
+
+| Code | Meaning |
+|------|---------|
+| `F` | Flower |
+| `L` | Leaf |
+| `R` | Root |
+| `S` | Stem |
+| `mixed` | Mixed / pooled samples |
+
+The remaining compound codes (`FL`, `FLR`, `FLS`, `FR`, `FS`, `FSR`, `LS`, `LR`, `LSR`, `SR`) represent different organs or developmental stages. The `F*` series are likely flower/fruit/inflorescence-related, the `L*` series leaf-related (e.g. `LS` may be leaf sheath), and `SR` may be stem/root-related. **The exact definitions of these abbreviations should be confirmed against the original experimental records.**
+
+---
+
+## 6. GO / KEGG Annotation Collections (`.xlsx`)
+
+These two files are GO-term / KEGG-pathway collections compiled from multi-species literature, intended as backgrounds for functional annotation or enrichment analysis.
 
 ### 6.1 `GO_collection_20260312_GY_V3.xlsx`
 
-- 共 603 行、7 列
-- 列：`No.`、`biological processes`、`GO`、`species`、`PUBMED id`、`species_latin`、`species_chinese`
-- `GO` 列为 GO 术语编号（如 `GO:0005198`），`species_latin` / `species_chinese` 为该术语来源物种的拉丁名 / 中文名，`PUBMED id` 为来源文献 PMID
+- 603 rows × 7 columns
+- Columns: `No.`, `biological processes`, `GO`, `species`, `PUBMED id`, `species_latin`, `species_chinese`
+- `GO` is the GO term ID (e.g. `GO:0005198`), `species_latin` / `species_chinese` are the Latin / Chinese names of the source species, and `PUBMED id` is the PMID of the source publication.
 
 ### 6.2 `KEGG_collection_20260312_GY_V3.xlsx`
 
-- 共 987 行、6 列
-- 列：`No.`、`KEGG_id`、`KEGG_term_standard`、`species_latin`、`species_chinese`、`PUBMED id`
-- `KEGG_id` 形如 `OSA00030`（OSA 前缀表示水稻 *Oryza sativa* 通路编号），`KEGG_term_standard` 为通路名称
+- 987 rows × 6 columns
+- Columns: `No.`, `KEGG_id`, `KEGG_term_standard`, `species_latin`, `species_chinese`, `PUBMED id`
+- `KEGG_id` looks like `OSA00030` (the `OSA` prefix denotes *Oryza sativa* pathway IDs), and `KEGG_term_standard` is the pathway name.
 
-来源物种覆盖多种植物（约 26–29 种），例如 *Glycine max*（大豆）、*Vitis vinifera*（葡萄）、*Camellia sinensis*（茶树）、*Solanum tuberosum*（马铃薯）、*Zea mays*（玉米）、*Brassica rapa*（芸薹）等。
+The source species span roughly 26–29 plant species, including *Glycine max* (soybean), *Vitis vinifera* (grape), *Camellia sinensis* (tea), *Solanum tuberosum* (potato), *Zea mays* (maize), *Brassica rapa* (field mustard), and others.
 
 ---
 
-## 7. GO / KEGG 基因集（`.gmt`）
+## 7. GO / KEGG Gene Sets (`.gmt`)
 
-GMT（Gene Matrix Transposed）格式，每行一个基因集：
+GMT (Gene Matrix Transposed) format, one gene set per line:
 
 ```text
-<基因集名称>  <描述/编号>  <基因1>  <基因2>  <基因3> ...
+<gene set name>  <description/id>  <gene1>  <gene2>  <gene3> ...
 ```
 
-- `GO_gene_sets.gmt`：762 个 GO 基因集。第一列为 GO 术语名（如 `LIGASE_ACTIVITY`），第二列为 GO 编号（如 `GO:0016874`），后续为属于该术语的基因编号（如 `Chr01G003960`）。
-- `KEGG_gene_sets.gmt`：141 个 KEGG 通路基因集。第一列为通路名（如 `LYSINE_BIOSYNTHESIS`），第二列为通路编号（如 `osa00300`），后续为属于该通路的基因编号（含 `Chr` 基因和 `novel` 基因）。
+- `GO_gene_sets.gmt`: 762 GO gene sets. The first column is the GO term name (e.g. `LIGASE_ACTIVITY`), the second column is the GO ID (e.g. `GO:0016874`), and the following columns are the gene IDs belonging to that term (e.g. `Chr01G003960`).
+- `KEGG_gene_sets.gmt`: 141 KEGG pathway gene sets. The first column is the pathway name (e.g. `LYSINE_BIOSYNTHESIS`), the second column is the pathway ID (e.g. `osa00300`), and the following columns are the gene IDs (including `Chr` genes and `novel` genes).
 
 ---
 
-## 8. 使用示例
+## 8. Usage Examples
 
-### 读取基因计数矩阵（R）
+### Read a count matrix (R)
 
 ```r
 counts <- read.delim("leaf_gene_count.xls", header = TRUE,
                      row.names = 1, check.names = FALSE)
-head(counts[, 1:6])   # 前 6 列为样本计数
+head(counts[, 1:6])   # the first 6 columns are sample counts
 ```
 
-### 读取基因计数矩阵（Python）
+### Read a count matrix (Python)
 
 ```python
 import pandas as pd
 
 df = pd.read_csv("leaf_gene_count.xls", sep="\t")
-counts = df.iloc[:, 1:7]      # 前 6 个样本列
-annot  = df.iloc[:, 7:]       # gene_name 及之后的注释列
+counts = df.iloc[:, 1:7]      # first 6 sample columns
+annot  = df.iloc[:, 7:]       # gene_name and the annotation columns after it
 ```
 
-### 富集分析
+### Enrichment analysis
 
-`.gmt` 文件可直接用于 clusterProfiler、gseapy 等工具：
+The `.gmt` files can be used directly with clusterProfiler, gseapy, and similar tools:
 
 ```r
 library(clusterProfiler)
@@ -190,16 +190,16 @@ enrich_result <- enricher(gene = my_gene_list, TERM2GENE = gs)
 
 ---
 
-## 9. 说明
+## 9. Notes
 
-- 计数列为**原始 read count**，未做 FPKM/TPM 标准化；差异表达分析前请使用 DESeq2、edgeR 等工具进行归一化。
-- 部分样本列顺序在不同文件中略有差异（例如 `SR_gene_count.xls`），读取时请以列名而非位置为准。
-- `mixed_gene_count.xls` 比其余文件多出 4,404 个 `novel.xxx` 新基因，合并分析时请注意基因集是否一致。
+- The count columns are **raw read counts** (not FPKM/TPM normalized); use DESeq2, edgeR, or similar tools for normalization before differential-expression analysis.
+- The column order differs slightly in a few files (e.g. `SR_gene_count.xls`); always select samples by column name rather than position.
+- `mixed_gene_count.xls` contains 4,404 extra `novel.xxx` genes compared with the other files; keep this in mind when merging gene sets.
 
 ---
 
-## 10. 数据来源与引用
+## 10. Data Sources and Citation
 
-- 参考基因组：*Spartina alterniflora* 基因组组装 `GWHCBIM00000000`（Genome Warehouse，CNCB-NGDC）
-- GO / KEGG 集合中的 `PUBMED id` 列记录了各术语/通路的来源文献，引用时请对应到具体文献。
-- 本仓库仅用于数据共享与整理；发表前请根据你使用的具体数据和文献补充正式引用。
+- Reference genome: *Spartina alterniflora* genome assembly `GWHCBIM00000000` (Genome Warehouse, CNCB-NGDC)
+- The `PUBMED id` columns in the GO/KEGG collections record the source publications for each term/pathway; cite the corresponding literature when using them.
+- This repository is intended for data sharing and organization only; please add formal citations for the specific data and publications you use before publishing.
